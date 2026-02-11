@@ -1,0 +1,8 @@
+docling
+pypdf
+chromadb
+sentence-transformers
+tqdm
+python-dateutil
+langdetect
+structlog
