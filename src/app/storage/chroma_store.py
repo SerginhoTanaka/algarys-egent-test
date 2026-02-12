@@ -11,7 +11,6 @@ class ChromaHnswStore:
             settings=ChromaSettings(anonymized_telemetry=False),
         )
 
-        # ✅ HNSW CONFIG vai em "configuration", não em "metadata"
         collection_config = {
             "hnsw": {
                 "space": settings.hnsw_space,                     

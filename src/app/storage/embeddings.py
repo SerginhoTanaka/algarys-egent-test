@@ -20,7 +20,6 @@ class OpenAIEmbeddingProvider(EmbeddingsProvider):
         }
 
 
-        # LangChain automaticamente usa OPENAI_API_KEY do ambiente
         self.model = OpenAIEmbeddings(**kwargs)
 
     def embed(self, texts: List[str]) -> List[List[float]]:
