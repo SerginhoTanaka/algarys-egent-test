@@ -6,3 +6,6 @@ tqdm
 python-dateutil
 langdetect
 structlog
+langchain_openai
+python-dotenv
+langchain-text-splitters
