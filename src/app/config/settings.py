@@ -1,16 +1,19 @@
 from pydantic import BaseModel
 from pathlib import Path
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 class Settings(BaseModel):
     project_name: str = "financial-docs-rag"
-    data_dir: Path = Path(os.getenv("DATA_DIR", "doc"))
+    data_dir: Path = Path(os.getenv("DATA_DIR", "data"))
     raw_dir: Path = data_dir / "raw"
     staged_dir: Path = data_dir / "staged"
     chroma_dir: Path = data_dir / "chroma"
 
     # embeddings
-    embedding_provider: str = os.getenv("EMBEDDING_PROVIDER", "local")  # local|api
+    embedding_provider: str = os.getenv("EMBEDDING_PROVIDER", "openai") 
+    openai_embedding_model: str = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
+
     local_embedding_model: str = os.getenv("LOCAL_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 
     # chroma/hnsw
