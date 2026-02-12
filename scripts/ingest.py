@@ -2,7 +2,6 @@ from pathlib import Path
 import sys
 from pathlib import Path as _Path
 
-# ensure `src` is on sys.path so imports like `app.*` resolve when running from repo root
 REPO_ROOT = _Path(__file__).resolve().parents[1]
 SRC_PATH = REPO_ROOT / "src"
 sys.path.insert(0, str(SRC_PATH))
