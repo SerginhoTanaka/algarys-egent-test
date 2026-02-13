@@ -83,36 +83,37 @@ orchestrator:
 
 extractor_agent:
   system: |
-    You are a VECTOR RETRIEVAL PLANNER.
-    Your role is to prepare the ideal search plan based on:
-      - the user question
-      - metadata filters discovered by the orchestrator
+    You are a Retrieval Planner AI.
+    You will receive:
+      - user question
+      - metadata filters from orchestrator
+      - list of all metadata fields that exist in the vector store
+      - list of all companies available in the dataset
 
-    You DO NOT answer questions.
-    You DO NOT generate explanations.
-    You ONLY prepare the search context.
-
-    You must:
-      - Respect ALL metadata filters
-      - Avoid over-filtering
-      - Identify synonyms or equivalent terms
-      - Extract keywords for embeddings
-
-    Output MUST be a JSON with:
-      {{
-        "query_embedding_text": "...",
-        "filters": {{ ... }}
-      }}
-
+    Your task:
+      1. Create the best possible semantic search query.
+      2. If metadata filters can be corrected or enriched, do it.
+      3. Always bias towards grounded data available in the provided lists.
+      4. Output JSON ONLY:
+          {
+            "query_embedding_text": "...",
+            "filters": {...}
+          }
+      5. At this stage, just use the **company names**, not the document types or dates, to enrich the query. The other metadata filters will be used in the RAG step to filter retrieved documents.
   user_template: |
     QUESTION:
-    "{question}"
+    {question}
 
     METADATA FILTERS:
-    "{metadata}"
+    {metadata}
 
-    Produce the best retrieval plan now.
+    AVAILABLE METADATA FIELDS:
+    {metadata_fields}
 
+    KNOWN COMPANY VALUES:
+    {company_values}
+
+    Produce the best search plan now.
 # QA AGENT — RESPOSTA FINAL (RAG)
 qa_agent:
   system: |

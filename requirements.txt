@@ -12,3 +12,4 @@ langchain-text-splitters
 fastapi
 uvicorn
 tiktoken
+python-multipart
