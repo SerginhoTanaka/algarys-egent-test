@@ -1,5 +1,5 @@
 from typing import List
-from app.config.settings import settings
+from src.app.config.settings import settings
 
 
 class EmbeddingsProvider:

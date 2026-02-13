@@ -1,22 +1,24 @@
-try:
-    from fastapi import FastAPI
-except Exception:  # pragma: no cover - FastAPI optional
-    FastAPI = None
+from dotenv import load_dotenv
+load_dotenv()
 
-from app.core.logging import get_logger
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from src.app.api.routers.ask import router as ask_router
 
-logger = get_logger(__name__)
+app = FastAPI(
+    title="Finance Multi-Agent API",
+    description="Pipeline Multi-Agentes para RAG Financeiro",
+    version="1.0.0"
+)
 
+# CORS (opcional)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-def create_app():
-    if FastAPI is None:
-        raise RuntimeError("FastAPI is not installed")
-    app = FastAPI(title="Document Ingestion API")
-    return app
-
-
-app = None
-try:
-    app = create_app()
-except Exception:
-    logger.debug("API app not created (FastAPI missing)")
+# Rotas principais
+app.include_router(ask_router)

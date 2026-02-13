@@ -2,9 +2,9 @@ import re
 from typing import List, Tuple
 from langchain_text_splitters import MarkdownHeaderTextSplitter
 
-from app.core.types import Chunk, DocumentMeta
-from app.core.utils import sha1_text
-from app.core.logging import logger
+from src.app.core.types import Chunk, DocumentMeta
+from src.app.core.utils import sha1_text
+from src.app.core.logging import logger
 
 
 # ---------------------------

@@ -9,3 +9,6 @@ structlog
 langchain_openai
 python-dotenv
 langchain-text-splitters
+fastapi
+uvicorn
+tiktoken

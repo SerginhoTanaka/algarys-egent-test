@@ -1,14 +1,14 @@
 from pathlib import Path
-from app.config.settings import settings
-from app.core.logging import logger
-from app.core.utils import ensure_dir
+from src.app.config.settings import settings
+from src.app.core.logging import logger
+from src.app.core.utils import ensure_dir
 
-from app.ingestion.pdf_to_md import PdfToMarkdownConverter
-from app.ingestion.metadata import MetadataExtractor
-from app.ingestion.chunking import AdaptiveMarkdownChunker
+from src.app.ingestion.pdf_to_md import PdfToMarkdownConverter
+from src.app.ingestion.metadata import MetadataExtractor
+from src.app.ingestion.chunking import AdaptiveMarkdownChunker
 
-from app.storage.embeddings import build_embeddings
-from app.storage.chroma_store import ChromaHnswStore
+from src.app.storage.embeddings import build_embeddings
+from src.app.storage.chroma_store import ChromaHnswStore
 
 class IngestionPipeline:
     def __init__(self):

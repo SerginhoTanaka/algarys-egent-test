@@ -2,7 +2,7 @@ from typing import List, Dict, Any, Optional
 import chromadb
 from chromadb.config import Settings as ChromaSettings
 
-from app.config.settings import settings
+from src.app.config.settings import settings
 
 class ChromaHnswStore:
     def __init__(self):
@@ -30,7 +30,7 @@ class ChromaHnswStore:
         ids = [c.chunk_id for c in chunks]
         docs = [c.text for c in chunks]
 
-        metas: List[Dict[str, Any]] = []
+        metas = []
         for c in chunks:
             metas.append({
                 "doc_id": c.doc_id,

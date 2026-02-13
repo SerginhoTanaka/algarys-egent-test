@@ -1,8 +1,8 @@
 import re
 from pathlib import Path
-from app.core.types import DocumentMeta
-from app.core.utils import stable_doc_id
-from app.core.logging import logger
+from src.app.core.types import DocumentMeta
+from src.app.core.utils import stable_doc_id
+from src.app.core.logging import logger
 
 COMPANY_HINTS = {
     "AMZN": "Amazon",

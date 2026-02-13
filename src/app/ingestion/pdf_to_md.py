@@ -1,6 +1,6 @@
 from pathlib import Path
-from app.core.utils import ensure_dir
-from app.core.logging import logger
+from src.app.core.utils import ensure_dir
+from src.app.core.logging import logger
 
 class PdfToMarkdownConverter:
     """
