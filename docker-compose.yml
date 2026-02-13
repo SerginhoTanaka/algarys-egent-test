@@ -1,0 +1,67 @@
+version: '3.9'
+
+services:
+  # API FastAPI
+  api:
+    build: .
+    container_name: rag-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn src.app.api.main:app --host 0.0.0.0 --port 8000
+    networks:
+      - rag-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Streamlit UI
+  streamlit:
+    build: .
+    container_name: rag-streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_URL=http://api:8000
+    command: streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+    networks:
+      - rag-network
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Chroma Database (Persistent)
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: rag-chroma
+    ports:
+      - "8080:8000"
+    volumes:
+      - chroma-data:/chroma_data
+    environment:
+      - CHROMA_HOST=0.0.0.0
+      - CHROMA_PORT=8000
+    networks:
+      - rag-network
+    restart: unless-stopped
+
+volumes:
+  chroma-data:
+    driver: local
+
+networks:
+  rag-network:
+    driver: bridge
