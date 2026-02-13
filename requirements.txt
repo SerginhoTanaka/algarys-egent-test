@@ -13,3 +13,5 @@ fastapi
 uvicorn
 tiktoken
 python-multipart
+streamlit
+requests
