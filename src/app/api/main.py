@@ -4,6 +4,7 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.app.api.routers.ask import router as ask_router
+from src.app.api.routers.ingest import router as ingest_router
 
 app = FastAPI(
     title="Finance Multi-Agent API",
@@ -22,3 +23,4 @@ app.add_middleware(
 
 # Rotas principais
 app.include_router(ask_router)
+app.include_router(ingest_router)
