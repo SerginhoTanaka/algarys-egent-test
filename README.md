@@ -33,7 +33,7 @@ git clone https://github.com/seu_usuario/rag-assistant.git
 cd rag-assistant
 
 # 2. Configure variáveis de ambiente
-cp .env.example .env
+cp .env
 # Edite .env e adicione sua OPENAI_API_KEY
 
 # 3. Build e inicie
